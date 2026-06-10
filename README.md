@@ -57,7 +57,7 @@
 ### 1. リポジトリをクローン
 
 ```bash
-git clone --recursive https://github.com/toriaezu-yattemitai/excuse-by-pollen.git
+git clone --recursive https://github.com/hduehgw0/excuse-by-pollen.git
 cd excuse-by-pollen
 ```
 

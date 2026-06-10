@@ -1,90 +1,92 @@
 # 花粉症・限界突破エクスキュース（言い訳）ジェネレーター
-花粉症を理由に言い訳を生成するジョークジェネレーターです。ユーザーは花粉症の症状や状況を入力し、AIがそれに基づいてユニークな言い訳を生成します。<br>
-生成された言い訳は、SNSで共有できます。そして生成した言い訳をさらに追加で指示して、再生成することもできます。
 
-入力情報には、症状、相手、状況、花粉症レベル(1-5)、ニュアンス(文体)があり、現在地の花粉データを利用することもできます。<br>
-症状以外は任意で、入力がない場合はAIがランダムに選択して言い訳を生成します。
+花粉症を理由に言い訳を生成するジョークジェネレーターです。症状や状況を入力すると、AI がユニークな言い訳を生成します。
+生成した言い訳は X（旧 Twitter）でシェアしたり、追加の指示を与えてさらに盛ることもできます。
 
-### 説得力スコア
-生成された文章がどれほど説得力があるかを数値化したスコアです。
+入力項目は **症状（必須）**、相手、状況、花粉症レベル（1〜5）、ニュアンス（文体）。  
+症状以外は任意で、未入力の場合は AI がランダムに選んで生成します。現在地の花粉データを利用することもできます。
 
 ## 技術スタック
-<img width="1582" height="1130" alt="Image" src="https://github.com/user-attachments/assets/f3cd9613-7981-43f5-b72d-d919fe1c611a" />
+
+![技術スタック図](https://github.com/user-attachments/assets/f3cd9613-7981-43f5-b72d-d919fe1c611a)
 
 ### フロントエンド
-- React
-- Next.js
-- TypeScript
-- Tailwind CSS
-- Vite
-- Font Awesome
-- Node.js/Bun
-- Vercel (デプロイ先)
 
-※OGP画像生成は厳密にはバックエンドに分類されるかもしれませんが、Vercelでホスティングしている上、フロントエンド担当が開発したため、こちらに記載しています。
+- Next.js / React / TypeScript
+- Tailwind CSS
+- Font Awesome
+- @vercel/og（OGP 画像生成）
+- Node.js / Bun
+- Vercel（デプロイ先）
 
 ### バックエンド
-- Python
-- FastAPI
-- Render.com (デプロイ先)
 
-フロントエンドが利用するAPIを実装しています。<br>
-Google Pollen APIやGemini 3 Flash、Upstash Redisとの連携もバックエンドで行っています。
+- Python / FastAPI
+- Google Pollen API（花粉データ取得）
+- Gemini 3 Flash（言い訳生成 AI）
+- Upstash Redis（シェア用データ保存）
+- Render.com（デプロイ先）
 
 ### データベース
-- Redis
-- Upstash (ホスティング)
 
-シェア機能を実装するためにidと紐づけてデータを保存する必要があるため、NoSQLで高速なRedisを採用しています。
+- Redis / Upstash
 
-## 機能について
-### 言い訳を生成する
-ユーザーが入力した症状や状況、相手、ニュアンスなどの情報をもとに、AIがユニークな言い訳を生成します。<br>
-症状のみ必須で、他の情報は任意です。入力がない場合はAIがランダムに選択して言い訳を生成します。
+シェア機能でID紐付きのデータを保存するため、高速な NoSQL である Redis を採用しています。
 
-### もっと盛る
-生成された言い訳をさらに追加で指示して、再生成することができます。<br>
-例えば、「もっと症状を盛って」「もっと相手に同情させるようにして」などの指示が可能です。
+## 機能
 
-### シェア機能
-生成された言い訳をXに投稿することができます。<br>
-OGP画像はフロントエンド側で生成します。
+| 機能 | 説明 |
+|---|---|
+| 言い訳を生成する | 症状・相手・状況・レベル・ニュアンスをもとに AI が言い訳を生成 |
+| もっと盛る | 生成済みの言い訳に追加指示を与えて再生成（例：「もっと症状を盛って」） |
+| 説得力スコア | 生成した言い訳の説得力を AI が数値化して表示 |
+| 読み上げ機能 | ブラウザの SpeechSynthesis API で言い訳を音声再生 |
+| バッジ表示 | 現在地の都市名・花粉指数・花粉の種類をバッジで表示 |
+| X シェア | OGP 画像付きで生成した言い訳を X に投稿 |
+| 位置情報の利用 | 緯度・経度をバックエンドに送信し、市区町村名と花粉データを取得 |
 
-### バッジ表示
-現在位置(都市名)、花粉指数、花粉の種類(スギなど)をバッジで結果の下に表示します。
+## ローカルでの実行（Docker 推奨）
 
-### 読み上げ機能
-生成された言い訳を音声で読み上げる機能です。<br>
-ブラウザのSpeechSynthesis APIを利用して実装しています。
-
-### 位置情報の利用と花粉データ
-フロント側で現在地を取得し、緯度と経度をバックエンドに送信して市区町村名に変換して処理されます。
-Google Pollen APIから花粉データを取得するために用いる、生成時にも言い訳を生成するために使われます。
-
-## セットアップ
-フロントエンド、バックエンドを含む全体をクローン
+### 1. リポジトリをクローン
 
 ```bash
 git clone --recursive https://github.com/toriaezu-yattemitai/excuse-by-pollen.git
+cd excuse-by-pollen
 ```
 
-## Dockerを用いて実行する
-### ビルド＆起動
+### 2. バックエンドの環境変数を設定
+
 ```bash
+cp back/.env.sample back/.env
+```
+
+`back/.env` を開き、以下のキーを実際の値に書き換えてください。
+
+| 変数名 | 内容 | 取得先 |
+|---|---|---|
+| `GEMINI_API_KEY` | Gemini API キー | Google AI Studio |
+| `POLLEN_API_KEY` | Google Pollen API キー | Google Cloud Console |
+| `UPSTASH_REDIS_REST_URL` | Upstash Redis の REST URL | Upstash コンソール |
+| `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis のトークン | Upstash コンソール |
+
+### 3. Docker で起動
+
+```bash
+# ビルド＆起動（初回）
 docker compose up --build
-```
 
-### 起動
-```bash
+# 2回目以降
 docker compose up
-```
 
-### 終了
-```bash
+# バックグラウンドで起動
+docker compose up -d
+
+# 終了
 docker compose down
 ```
 
-### バックグラウンド起動
-```bash
-docker compose up -d
-```
+起動後、[http://localhost:3000](http://localhost:3000) でアクセスできます。
+
+> フロントエンド・バックエンドそれぞれを個別に起動する場合は、各サブモジュールの README を参照してください。
+> - [front/README.md](front/README.md)
+> - [back/README.md](back/README.md)

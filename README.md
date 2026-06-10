@@ -88,5 +88,5 @@ docker compose down
 起動後、[http://localhost:3000](http://localhost:3000) でアクセスできます。
 
 > フロントエンド・バックエンドそれぞれを個別に起動する場合は、各サブモジュールの README を参照してください。
-> - [front/README.md](front/README.md)
-> - [back/README.md](back/README.md)
+> - [excuse-by-pollen-front](https://github.com/hduehgw0/excuse-by-pollen-front)
+> - [excuse-by-pollen-back](https://github.com/hduehgw0/excuse-by-pollen-back)

@@ -1,5 +1,8 @@
 # 花粉症・限界突破エクスキュース（言い訳）ジェネレーター
 
+**技育CAMP2026 ハッカソン Vol.1（サポーターズ主催）にて「サポーターズ賞」を受賞した作品です。** 🏆  
+チーム「とりあえずやってみ隊」が2週間で開発しました。
+
 花粉症を理由に言い訳を生成するジョークジェネレーターです。症状や状況を入力すると、AI がユニークな言い訳を生成します。
 生成した言い訳は X（旧 Twitter）でシェアしたり、追加の指示を与えてさらに盛ることもできます。
 
@@ -44,11 +47,7 @@
 - Upstash Redis（シェア用データ保存）
 - Render.com（デプロイ先）
 
-### データベース
-
-- Redis / Upstash
-
-シェア機能でID紐付きのデータを保存するため、高速な NoSQL である Redis を採用しています。
+シェア機能で ID 紐付きのデータを保存するため、高速な NoSQL である Redis（Upstash でホスティング）を採用しています。
 
 ## 機能
 
@@ -107,3 +106,7 @@ docker compose down
 > フロントエンド・バックエンドそれぞれを個別に起動する場合は、各サブモジュールの README を参照してください。
 > - [excuse-by-pollen-front](https://github.com/hduehgw0/excuse-by-pollen-front)
 > - [excuse-by-pollen-back](https://github.com/hduehgw0/excuse-by-pollen-back)
+
+## ライセンス
+
+[MIT License](LICENSE)

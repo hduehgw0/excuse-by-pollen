@@ -16,15 +16,16 @@
 
 ### 言い訳の生成
 
-症状・相手・状況などを入力すると、AI が言い訳を生成し、説得力スコアと現在地の花粉バッジを表示します。
+症状・相手・状況などを入力すると、AI が言い訳を生成し、説得力スコアを表示します。  
+結果の下のバッジは Google Pollen API から取得した実際の現在地の花粉データです（撮影時：藤沢市・花粉指数2・イネ科）。
 
-<img width="1512" alt="言い訳の生成画面" src="https://github.com/user-attachments/assets/3449fe71-27c5-44d9-8ac3-658101115037" />
+<img width="1512" alt="言い訳の生成画面" src="https://github.com/user-attachments/assets/2b159689-db1c-43b1-b9c5-5b9160846011" />
 
 ### もっと盛る
 
-生成した言い訳に追加指示を与えて再生成できます。説得力スコアが 84 → 94 に上昇しています。
+生成した言い訳に追加指示（例：「もっとうるさい感じで」）を与えて再生成できます。説得力スコアが 88 → 92 に上昇しています。
 
-<img width="1512" alt="もっと盛る機能で再生成した画面" src="https://github.com/user-attachments/assets/b48c183b-a3d1-4ded-b697-3614892d57dd" />
+<img width="1512" alt="もっと盛る機能で再生成した画面" src="https://github.com/user-attachments/assets/c304087d-a059-42ec-ae9e-cbbd078bd39e" />
 
 ## 技術スタック
 

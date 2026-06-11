@@ -43,6 +43,7 @@
 
 - Python / FastAPI
 - Google Pollen API（花粉データ取得）
+- Google Geocoding API（緯度経度 → 市区町村名の変換）
 - Gemini 3 Flash（言い訳生成 AI）
 - Upstash Redis（シェア用データ保存）
 - Render.com（デプロイ先）
